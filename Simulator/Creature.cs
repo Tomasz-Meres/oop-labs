@@ -8,22 +8,7 @@ public abstract class Creature
         get { return name; }
         init
         {
-            if (value == null)
-                value = "Unknown";
-
-            value = value.Trim();
-
-            if (value.Length > 25)
-                value = value.Substring(0, 25);
-
-            value = value.Trim();
-
-            if (value.Length < 3)
-                value = value.PadRight(3, '#');
-
-            if (char.IsLetter(value[0]) && char.IsLower(value[0]))
-                value = char.ToUpper(value[0]) + value.Substring(1);
-            name = value;
+            name = Validator.Shortener(value, 3, 25, '#');
         }
     }
     private int level;
@@ -32,11 +17,7 @@ public abstract class Creature
         get { return level; }
         init
         {
-            if (value < 1)
-                value = 1;
-            if (value > 10)
-                value = 10;
-            level = value;
+            level = Validator.Limiter(value, 1, 10);
         }
     }
 

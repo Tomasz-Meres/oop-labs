@@ -8,11 +8,7 @@ public class Orc : Creature
         get { return rage; }
         init
         {
-            if (value < 0)
-                value = 0;
-            if (value > 10)
-                value = 10;
-            rage = value;
+            rage = Validator.Limiter(value, 0, 10);
         }
     }
     private static int orcCount = 0;
