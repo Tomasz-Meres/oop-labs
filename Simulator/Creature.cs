@@ -1,33 +1,37 @@
 ﻿namespace Simulator;
 
-public class Creature
+public abstract class Creature
 {
     private string name = "Unknown";
-    public string Name 
-    { get { return name; } 
-      init { 
-         if (value == null)
-             value = "Unknown";
+    public string Name
+    {
+        get { return name; }
+        init
+        {
+            if (value == null)
+                value = "Unknown";
 
-         value = value.Trim();
+            value = value.Trim();
 
-         if (value.Length > 25)
-             value = value.Substring(0, 25);
+            if (value.Length > 25)
+                value = value.Substring(0, 25);
 
-         value = value.Trim();
+            value = value.Trim();
 
-         if (value.Length < 3)
-             value = value.PadRight(3, '#');
-         
-         if (char.IsLetter(value[0]) && char.IsLower(value[0]))
-             value = char.ToUpper(value[0]) + value.Substring(1);
-         name = value;
-      }
+            if (value.Length < 3)
+                value = value.PadRight(3, '#');
+
+            if (char.IsLetter(value[0]) && char.IsLower(value[0]))
+                value = char.ToUpper(value[0]) + value.Substring(1);
+            name = value;
+        }
     }
     private int level;
-    public int Level {
-      get { return level; }
-      init {
+    public int Level
+    {
+        get { return level; }
+        init
+        {
             if (value < 1)
                 value = 1;
             if (value > 10)
@@ -45,10 +49,7 @@ public class Creature
         Name = name;
         Level = level;
     }
-    public void SayHi()
-    {
-        Console.WriteLine($"Hi, I'm {Name}, my level is {Level}.");
-    }
+    public abstract void SayHi();
 
     public string Info
     {
@@ -67,7 +68,8 @@ public class Creature
         Console.WriteLine($"{Name} goes {directionText}");
     }
 
-    public void Go(Direction[] dirs) { 
+    public void Go(Direction[] dirs)
+    {
         foreach (var dir in dirs)
         {
             Go(dir);
@@ -79,4 +81,7 @@ public class Creature
         Direction[] dirs = DirectionParser.Parse(dirText);
         Go(dirs);
     }
+
+    public abstract int Power { get; }
 }
+
