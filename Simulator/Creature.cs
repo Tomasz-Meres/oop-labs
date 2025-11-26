@@ -32,10 +32,7 @@ public abstract class Creature
     }
     public abstract void SayHi();
 
-    public string Info
-    {
-        get { return $"{Name} [{Level}]"; }
-    }
+    public abstract string Info { get; }
 
     public void Upgrade()
     {
@@ -64,5 +61,10 @@ public abstract class Creature
     }
 
     public abstract int Power { get; }
+
+    public override string ToString()
+    {
+        return $"{GetType().Name.ToUpper()}: {Info}";
+    }
 }
 
