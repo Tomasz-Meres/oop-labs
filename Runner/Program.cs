@@ -1,7 +1,10 @@
-﻿namespace Simulator;
+﻿using Simulator;
+
+namespace Runner;
 
 internal class Program
 {
+
     static void Main(string[] args)
     {
         Console.WriteLine("Starting Simulator!\n");
@@ -72,20 +75,20 @@ internal class Program
     {
         Console.WriteLine("HUNT TEST\n");
         var o = new Orc() { Name = "Gorbag", Rage = 7 };
-        o.SayHi();
+        o.Greeting();
         for (int i = 0; i < 10; i++)
         {
             o.Hunt();
-            o.SayHi();
+            o.Greeting();
         }
 
         Console.WriteLine("\nSING TEST\n");
         var e = new Elf("Legolas", agility: 2);
-        e.SayHi();
+        e.Greeting();
         for (int i = 0; i < 10; i++)
         {
             e.Sing();
-            e.SayHi();
+            e.Greeting();
         }
 
         Console.WriteLine("\nPOWER TEST\n");
@@ -104,27 +107,27 @@ internal class Program
     static void TestValidators()
     {
         Creature c = new Orc() { Name = "   Shrek    ", Level = 20 };
-        c.SayHi();
+        c.Greeting();
         c.Upgrade();
         Console.WriteLine(c.Info);
 
         c = new Elf("  ", -5);
-        c.SayHi();
+        c.Greeting();
         c.Upgrade();
         Console.WriteLine(c.Info);
 
         c = new Orc("  donkey ") { Level = 7 };
-        c.SayHi();
+        c.Greeting();
         c.Upgrade();
         Console.WriteLine(c.Info);
 
         c = new Elf("Puss in Boots – a clever and brave cat.");
-        c.SayHi();
+        c.Greeting();
         c.Upgrade();
         Console.WriteLine(c.Info);
 
         c = new Orc("a                            troll name", 5);
-        c.SayHi();
+        c.Greeting();
         c.Upgrade();
         Console.WriteLine(c.Info);
 
@@ -153,5 +156,4 @@ internal class Program
             ORC: Morgash [6][4]
         */
     }
-
 }

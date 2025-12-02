@@ -30,7 +30,7 @@ public abstract class Creature
         Name = name;
         Level = level;
     }
-    public abstract void SayHi();
+    public abstract string Greeting();
 
     public abstract string Info { get; }
 
@@ -40,24 +40,22 @@ public abstract class Creature
             level += 1;
     }
 
-    public void Go(Direction dir)
-    {
-        string directionText = dir.ToString().ToLower();
-        Console.WriteLine($"{Name} goes {directionText}");
-    }
+    string Go(Direction direction) => $"{direction.ToString().ToLower()}";
 
-    public void Go(Direction[] dirs)
+    public string[] Go(Direction[] dirs)
     {
-        foreach (var dir in dirs)
+        string[] results = new string[dirs.Length];
+        for (int i = 0; i < dirs.Length; i++)
         {
-            Go(dir);
+            results[i] = Go(dirs[i]);
         }
+        return results;
     }
 
-    public void Go(string dirText)
+    public string[] Go(string dirText)
     {
         Direction[] dirs = DirectionParser.Parse(dirText);
-        Go(dirs);
+        return Go(dirs);
     }
 
     public abstract int Power { get; }

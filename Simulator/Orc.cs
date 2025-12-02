@@ -14,18 +14,12 @@ public class Orc : Creature
     private static int orcCount = 0;
     public void Hunt() 
     { 
-        Console.WriteLine($"{Name} is hunting.");
         orcCount++;
         if (orcCount % 2 == 0)
         {
             if (rage < 10)
             {
                 rage++;
-                Console.WriteLine($"{Name} has improved rage to {rage}!");
-            }
-            else
-            {
-                Console.WriteLine($"{Name} already has maximum rage.");
             }
         }
     }
@@ -37,9 +31,9 @@ public class Orc : Creature
 
     public Orc() : base() { }
 
-    public override void SayHi()
+    public override string Greeting()
     {
-        Console.WriteLine($"Hi, I'm {Name}, my level is {Level}, my rage is {Rage}.");
+        return $"Hi, I'm {Name}, my level is {Level}, my rage is {Rage}.";
     }
     public override string Info
     {

@@ -12,19 +12,14 @@ public class Elf : Creature
     private static int elfCount = 0;
     public void Sing()
     {
-        Console.WriteLine($"{Name} is singing.");
         elfCount++;
         if (elfCount % 3 == 0)
         {
             if (agility < 10)
             {
                 agility++;
-                Console.WriteLine($"{Name} has improved agility to {agility}!");
             }
-            else
-            {
-                Console.WriteLine($"{Name} already has maximum agility.");
-            }
+
         }
     }
 
@@ -35,9 +30,9 @@ public class Elf : Creature
 
     public Elf() : base() { }
 
-    public override void SayHi()
+    public override string Greeting()
     {
-        Console.WriteLine($"Hi, I'm {Name}, my level is {Level}, my agility is {Agility}.");
+        return $"Hi, I'm {Name}, my level is {Level}, my agility is {Agility}.";
     }
 
     public override string Info
