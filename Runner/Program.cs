@@ -12,8 +12,11 @@ internal class Program
         //TestDirections();
         //TestElfsAndOrcs();
         //TestValidators();
-        TestObjectsToString();
+        //TestObjectsToString();
 
+        Point p = new(10, 25);
+        Console.WriteLine(p.Next(Direction.Right));          // (11, 25)
+        Console.WriteLine(p.NextDiagonal(Direction.Right));  // (11, 24)
     }
 
     //static void TestCreatures()
