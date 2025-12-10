@@ -1,7 +1,7 @@
 ﻿namespace Simulator;
 public static class DirectionParser
 {
-    public static Direction[] Parse(string text)
+    public static List<Direction> Parse(string text)
     {
         List<Direction> directions = new();
         foreach (char ch in text)
@@ -15,6 +15,6 @@ public static class DirectionParser
                 default: break;
             }
         }
-        return directions.ToArray();
+        return directions;
     }
 }

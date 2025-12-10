@@ -21,10 +21,10 @@ public class SmallSquareMapTests
     }
 
     [Theory]
-    [InlineData(0, 0, 5, true)]
-    [InlineData(4, 4, 5, true)]
-    [InlineData(5, 5, 5, false)]
-    [InlineData(-1, 3, 5, false)]
+    [InlineData(0, 0, 6, true)]
+    [InlineData(4, 4, 6, true)]
+    [InlineData(5, 5, 6, true)]
+    [InlineData(-1, 3,6, false)]
     public void Exist_ShouldReturnCorrectValue(int x, int y, int size, bool expected)
     {
         var map = new SmallSquareMap(size);
@@ -44,7 +44,7 @@ public class SmallSquareMapTests
     [InlineData(-5, -5, Direction.Up, -5, -5)]
     public void Next_ShouldShiftCorrectly(int x, int y, Direction dir, int ex, int ey)
     {
-        var map = new SmallSquareMap(10);
+        var map = new SmallSquareMap(9);
         var p = new Point(x, y);
 
         Assert.Equal(new Point(ex, ey), map.Next(p, dir));
@@ -61,7 +61,7 @@ public class SmallSquareMapTests
     [InlineData(-5, -5, Direction.Up, -5, -5)]
     public void NextDiagonal_ShouldShiftCorrectly(int x, int y, Direction dir, int ex, int ey)
     {
-        var map = new SmallSquareMap(10);
+        var map = new SmallSquareMap(9);
         var p = new Point(x, y);
 
         Assert.Equal(new Point(ex, ey), map.NextDiagonal(p, dir));

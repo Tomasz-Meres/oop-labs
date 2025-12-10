@@ -2,31 +2,20 @@
 
 public class SmallTorusMap : Map
 {
-    public readonly int Size;
-
-    private readonly Rectangle area;
-
-    public SmallTorusMap(int size)
+    public SmallTorusMap(int sizeX, int sizeY) : base(sizeX, sizeY)
     {
-        if (size < 5 || size > 20)
-            throw new ArgumentOutOfRangeException(nameof(size), "Size must be between 5 and 20.");
-
-        Size = size;
-
-        area = new Rectangle(0, 0, Size - 1, Size - 1);
-    }
-
-    public override bool Exist(Point p)
-    {
-        return area.Contains(p);
+        if (sizeX > 20)
+            throw new ArgumentOutOfRangeException(nameof(sizeX), "The maximum size is 20.");
+        if (sizeY > 20)
+            throw new ArgumentOutOfRangeException(nameof(sizeY), "The maximum size is 20.");
     }
 
     public override Point Next(Point p, Direction d)
     {
         Point next = p.Next(d);
 
-        int x = (next.X + Size) % Size;
-        int y = (next.Y + Size) % Size;
+        int x = (next.X + SizeX) % SizeX;
+        int y = (next.Y + SizeY) % SizeY;
 
         return new Point(x, y);
     }
@@ -35,8 +24,8 @@ public class SmallTorusMap : Map
     {
         Point next = p.NextDiagonal(d);
 
-        int x = (next.X + Size) % Size;
-        int y = (next.Y + Size) % Size;
+        int x = (next.X + SizeX) % SizeX;
+        int y = (next.Y + SizeY) % SizeY;
 
         return new Point(x, y);
     }

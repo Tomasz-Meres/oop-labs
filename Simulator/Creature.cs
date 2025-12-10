@@ -1,24 +1,43 @@
-﻿namespace Simulator;
+﻿using Simulator.Maps;
+
+namespace Simulator;
 
 public abstract class Creature
 {
-    private string name = "Unknown";
+    private Map? _map;
+    private Point _point;
+    public Point Position => _point;
+    public Map? CurrentMap => _map;
+
+    private string _name = "Unknown";
     public string Name
     {
-        get { return name; }
+        get { return _name; }
         init
         {
-            name = Validator.Shortener(value, 3, 25, '#');
+            _name = Validator.Shortener(value, 3, 25, '#');
         }
     }
-    private int level;
+    private int _level;
     public int Level
     {
-        get { return level; }
+        get { return _level; }
         init
         {
-            level = Validator.Limiter(value, 1, 10);
+            _level = Validator.Limiter(value, 1, 10);
         }
+    }
+
+    public void InitMapAndPosition(Map map, Point StartingPosition)
+    {
+        if (map == null) return;
+        if (!map.Exist(StartingPosition))
+            throw new ArgumentOutOfRangeException(nameof(StartingPosition), "Point out of map");
+        
+        map.Add(this, StartingPosition);
+        
+        _map = map;
+        _point = StartingPosition;
     }
 
     public Creature()
@@ -36,26 +55,25 @@ public abstract class Creature
 
     public void Upgrade()
     {
-        if (level < 10)
-            level += 1;
+        if (_level < 10)
+            _level += 1;
     }
 
-    string Go(Direction direction) => $"{direction.ToString().ToLower()}";
-
-    public string[] Go(Direction[] dirs)
+    public void Go(Direction direction)
     {
-        string[] results = new string[dirs.Length];
-        for (int i = 0; i < dirs.Length; i++)
+        if (_map == null) return;
+
+        Point NextPoint = _map.Next(_point, direction);
+
+        try
         {
-            results[i] = Go(dirs[i]);
+            _map.Move(this, NextPoint);
+            _point = NextPoint;
         }
-        return results;
-    }
+        catch
+        {
 
-    public string[] Go(string dirText)
-    {
-        Direction[] dirs = DirectionParser.Parse(dirText);
-        return Go(dirs);
+        }
     }
 
     public abstract int Power { get; }
