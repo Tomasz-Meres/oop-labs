@@ -30,6 +30,7 @@ public class Elf : Creature
 
     public Elf() : base() { }
 
+    public override char Symbol => 'E';
     public override string Greeting()
     {
         return $"Hi, I'm {Name}, my level is {Level}, my agility is {Agility}.";

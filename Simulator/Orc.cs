@@ -31,6 +31,7 @@ public class Orc : Creature
 
     public Orc() : base() { }
 
+    public override char Symbol => 'O';
     public override string Greeting()
     {
         return $"Hi, I'm {Name}, my level is {Level}, my rage is {Rage}.";

@@ -28,6 +28,8 @@ public abstract class Creature
         }
     }
 
+    public virtual char Symbol => '?';
+
     public void InitMapAndPosition(Map map, Point StartingPosition)
     {
         if (map == null) return;
