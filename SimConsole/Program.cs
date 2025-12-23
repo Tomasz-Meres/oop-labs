@@ -20,7 +20,6 @@ internal class Program
         Console.WriteLine("SIMULATION!\n");
         Console.WriteLine("Starting positions:");
         mapVisualizer.Draw();
-        int turnNumber = 1;
 
         int turn = 1;
         while (!simulation.Finished)

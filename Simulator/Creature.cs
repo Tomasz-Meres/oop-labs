@@ -2,12 +2,12 @@
 
 namespace Simulator;
 
-public abstract class Creature
+public abstract class Creature : IMappable
 {
     private Map? _map;
     private Point _point;
     public Point Position => _point;
-    public Map? CurrentMap => _map;
+    public Map? Map => _map;
 
     private string _name = "Unknown";
     public string Name
@@ -28,16 +28,16 @@ public abstract class Creature
         }
     }
 
-    public virtual char Symbol => '?';
+    public virtual char MapSymbol => '?';
 
     public void InitMapAndPosition(Map map, Point StartingPosition)
     {
         if (map == null) return;
         if (!map.Exist(StartingPosition))
             throw new ArgumentOutOfRangeException(nameof(StartingPosition), "Point out of map");
-        
+
         map.Add(this, StartingPosition);
-        
+
         _map = map;
         _point = StartingPosition;
     }
