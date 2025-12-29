@@ -12,7 +12,7 @@ public class Simulation
     /// <summary>
     /// Creatures moving on the map.
     /// </summary>
-    public List<Creature> Creatures { get; }
+    public List<IMappable> Beings { get; }
 
     /// <summary>
     /// Starting positions of creatures.
@@ -43,14 +43,14 @@ public class Simulation
     /// <summary>
     /// index of current creature to move.
     /// </summary>
-    private int _currentCreatureIndex = 0;
+    private int _currentBeingIndex = 0;
 
     /// <summary>
     /// Creature which will be moving current turn.
     /// </summary>
-    public Creature CurrentCreature 
+    public IMappable CurrentBeing
     { 
-        get { return Creatures[_currentCreatureIndex]; }
+        get { return Beings[_currentBeingIndex]; }
     }
 
     /// <summary>
@@ -72,22 +72,22 @@ public class Simulation
     /// if number of creatures differs from
     /// number of starting positions.
     /// </summary>
-    public Simulation(Map map, List<Creature> creatures,
+    public Simulation(Map map, List<IMappable> beings,
         List<Point> positions, string moves)
     {
-        if (creatures.Count == 0)
-            throw new ArgumentException("Creatures list is empty", nameof(creatures));
-        if (creatures.Count != positions.Count)
+        if (beings.Count == 0)
+            throw new ArgumentException("Creatures list is empty", nameof(beings));
+        if (beings.Count != positions.Count)
             throw new ArgumentException("Number of creatures differs from number of starting positions");
 
         Map = map;
-        Creatures = creatures;
+        Beings = beings;
         Positions = positions;
         Moves = moves ?? "";
         _parsedMoves = DirectionParser.Parse(moves);
-        for (int i = 0; i < Creatures.Count; i++)
+        for (int i = 0; i < Beings.Count; i++)
         {
-            Creatures[i].InitMapAndPosition(Map, Positions[i]);
+            Beings[i].InitMapAndPosition(Map, Positions[i]);
         }
 
     }
@@ -104,9 +104,9 @@ public class Simulation
             throw new InvalidOperationException("Simulation has finished.");
 
         Direction dir = _parsedMoves[_currentTurnIndex];
-        CurrentCreature.Go(dir);
+        CurrentBeing.Go(dir);
 
-        _currentCreatureIndex = (_currentCreatureIndex + 1) % Creatures.Count;
+        _currentBeingIndex = (_currentBeingIndex + 1) % Beings.Count;
         _currentTurnIndex = (_currentTurnIndex + 1) % _parsedMoves.Count;
         _movesDone++;
         if (_movesDone >= _parsedMoves.Count)
