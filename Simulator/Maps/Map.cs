@@ -6,6 +6,7 @@
 public abstract class Map
 {
     private Dictionary<Point, List<IMappable>> _points;
+    protected readonly Dictionary<Point, char> _symbols = [];
 
     public readonly int SizeX, SizeY;
     private readonly Rectangle area;
@@ -55,10 +56,15 @@ public abstract class Map
     public void Add(IMappable mappable, Point p)
     {
         if (!_points.ContainsKey(p))
-        {
             _points[p] = new List<IMappable>();
-        }
+
         _points[p].Add(mappable);
+
+        // symbol do historii
+        _symbols[p] = _points[p].Count > 1
+            ? 'X'
+            : mappable.MapSymbol;
+
     }
     /// <summary>
     /// Remove creature from map
@@ -74,6 +80,16 @@ public abstract class Map
 
             if (list.Count == 0)
                 _points.Remove(p);
+            _symbols.Remove(p);
+        }
+        else if (list.Count == 1)
+        {
+            // został jeden → jego symbol
+            _symbols[p] = list[0].MapSymbol;
+        }
+        else
+        {
+            _symbols[p] = 'X';
         }
     }
 
@@ -98,4 +114,6 @@ public abstract class Map
     /// <param name="y">Point to check y coordinate</param>
     /// <returns>List of creatures at given point or null if none</returns>
     public List<IMappable>? At(int x, int y) => At(new Point(x, y));
+
+    public abstract Dictionary<Point, char> GetSymbols();
 }

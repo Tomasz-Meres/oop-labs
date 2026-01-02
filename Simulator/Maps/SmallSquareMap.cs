@@ -25,4 +25,9 @@ public class SmallSquareMap : Map
 
         return Exist(next) ? next : p;
     }
+
+    public override Dictionary<Point, char> GetSymbols()
+    {
+        return new Dictionary<Point, char>(_symbols);
+    }
 }
