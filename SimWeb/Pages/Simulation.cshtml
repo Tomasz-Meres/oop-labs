@@ -1,0 +1,53 @@
+﻿@page "{turn?}"
+@model SimWeb.Pages.SimulationModel
+@{
+    ViewData["Title"] = "Symulacja";
+}
+
+<div class="map-header">
+    <form method="get">
+        <input type="hidden" name="turn" value="@(Model.CurrentTurn - 1)" />
+        <button type="submit" @(Model.CurrentTurn == 0 ? "disabled" : "")>←</button>
+    </form>
+
+    <span id="turn-info">Tura @Model.CurrentTurn</span>
+
+    <form method="get">
+        <input type="hidden" name="turn" value="@(Model.CurrentTurn + 1)" />
+        <button type="submit" @(Model.CurrentTurn == Model.MaxTurn ? "disabled" : "")>→</button>
+    </form>
+</div>
+
+<div class="map-container">
+    @for (int y = Model.SizeY - 1; y >= 0; y--)
+    {
+        <p class="map-label-row">@y</p>
+        @for (int x = 0; x < Model.SizeX; x++)
+        {
+            <div class="map-cell" id="cell-@x-@y">
+                @Html.Raw(Model.GetCellContent(x, y))
+            </div>
+        }
+    }
+
+    <p></p> <!-- lewy dolny róg -->
+    @for (int x = 0; x < Model.SizeX; x++)
+    {
+        <p class="map-label-col">@x</p>
+    }
+</div>
+
+
+<div class="map-footer">
+    @if (Model.CurrentTurn == 0)
+    {
+        <text><span style="color:darkred">Pozycje startowe</span></text>
+    }
+    else
+    {
+        var turn = Model.Log.TurnLogs[Model.CurrentTurn];
+        <text>@turn.Mappable <span style="color:darkred">⇒ @turn.Move</span></text>
+    }
+</div>
+
+

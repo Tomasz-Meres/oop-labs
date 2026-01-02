@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SimWeb</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <h1>SimWeb</h1>
+        <nav>
+            @if (ViewData["Title"] as string == "Informacje")
+            {
+                <span>Informacje</span>
+            }
+            else
+            {
+                <a class="active" href="/">Informacje</a>
+            }
+
+            @if (ViewData["Title"] as string == "Symulacja")
+            {
+                <span>Symulacja</span>
+            }
+            else
+            {
+                <a class="active" href="/Simulation">Symulacja</a>
+            }
+        </nav>
+    </header>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer>
+        <p>©2026 Tomasz Meres</p>
+    </footer>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
