@@ -41,13 +41,36 @@
 <div class="map-footer">
     @if (Model.CurrentTurn == 0)
     {
-        <text><span style="color:darkred">Pozycje startowe</span></text>
+        <text><span style="color:darkred">Starting positions</span></text>
     }
     else
     {
         var turn = Model.Log.TurnLogs[Model.CurrentTurn];
         <text>@turn.Mappable <span style="color:darkred">⇒ @turn.Move</span></text>
     }
+
+    <div class="turn-actions">
+        
+            @foreach (var action in Model.Log.TurnLogs[Model.CurrentTurn].Actions)
+            {
+                <p>@action</p>
+            }
+        
+    </div>
+
+    <div class="health-status">
+        <h4>Health Status:</h4>
+ 
+            @foreach (var status in Model.Log.TurnLogs[Model.CurrentTurn].HealthStatus)
+            {
+                <p>@status</p>
+            }
+            @if (Model.Log.TurnLogs[Model.CurrentTurn].HealthStatus.Count == 0)
+            {
+                <p>There is no being with HP</p>
+            }
+        
+    </div>
 </div>
 
 

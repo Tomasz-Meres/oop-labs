@@ -19,4 +19,14 @@ public class TurnLog
     /// Dictionary of IMappable.Symbol on the map in this turn.
     /// </summary>
     public required Dictionary<Point, char> Symbols { get; init; }
+
+    /// <summary>
+    /// List of health statuses of all Creatures after this turn.
+    /// </summary>
+    public List<string> HealthStatus { get; init; } = new();
+
+    /// <summary>
+    /// Additional actions taken during this turn.
+    /// </summary>
+    public List<string> Actions { get; init; } = new();
 }

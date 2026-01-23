@@ -8,6 +8,23 @@
 
 <p>Wizualizacja symulacji z wykorzystaniem programowania obiektowego w C# i Razor Pages.</p>
 <p>Mapa typu torus.</p>
-<p>Sekwencja ruchów: <b>dlrludluddlrulr</b></p>
+<p>Sekwencja ruchów: <b>rlulr rlddu sdrdr uuss dd</b></p>
+<section class="simulation-features">
+    <h3>Obiekty Statyczne</h3>
+    <ul>
+        <li><strong>Karczma (Inn):</strong> Regeneruje punkty życia bohaterów (Creatures). Zwierzęta ignorują leczenie.</li>
+        <li><strong>Plaga (Plague):</strong> Pole obniżające zdrowie bohaterów oraz liczebność stad zwierząt.</li>
+        <li><strong>Magiczne Źródło (Magic Source):</strong> Miejsce wzmacniające specjalne umiejętności bohaterów.</li>
+        <li><strong>Góry (Mountains):</strong> Blokuje ruch jednostek, wymuszając na nich pozostanie na poprzednim polu. Jedynie ptaki latające są w stanie przejść przez to pole.</li>
+    </ul>
+
+    <h3>Mechanika Walki</h3>
+    <ul>
+        <li><strong>Bezpośrednie Starcia:</strong> Automatyczna inicjacja ataku w momencie spotkania się dwóch jednostek na tym samym polu (poza strefami bezpiecznymi).</li>
+        <li><strong>Natychmiastowa Eliminacja:</strong> Jednostki, których HP lub liczebność (Size) spadnie do zera, są usuwane z mapy i listy aktywnych bytów w czasie rzeczywistym.</li>
+        <li><strong>Dynamiczne Symbole Mapy:</strong> Automatyczna zamiana ikony bitwy na symbol zwycięzcy natychmiast po pokonaniu przeciwnika, jeżeli na polu nie ma innych obiektów lub stworzeń.</li>
+        <li><strong>Synchronizacja Tur:</strong> Inteligentne zarządzanie kolejnością ruchu, które zapobiega błędnemu przeskakiwaniu tur po śmierci aktywnej postaci.</li>
+    </ul>
+</section>
 
 <img src="/images/orc-500.png" alt="Orc" width="500" height="500" />

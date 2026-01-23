@@ -1,1 +1,31 @@
-﻿
+﻿.simulation-features {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 800px;
+    margin: 20px auto;
+    color: #333;
+    line-height: 1.6;
+}
+
+    .simulation-features h3 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+        margin-top: 25px;
+        text-transform: uppercase;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+    }
+
+    .simulation-features ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .simulation-features li {
+        background: #f8f9fa;
+        margin-bottom: 8px;
+        padding: 12px 15px;
+        border-left: 4px solid #3498db;
+        border-radius: 0 4px 4px 0;
+        transition: transform 0.2s ease;
+    }

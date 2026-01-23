@@ -38,7 +38,13 @@ public class Birds : Animals
         {
         }
     }
-
+    public override Point GetDestination(Direction d)
+    {
+        if (Map == null) return Position;
+        return CanFly
+            ? Map.Next(Map.Next(Position, d), d)
+            : Map.NextDiagonal(Position, d);
+    }
 
     public override string Info
     {

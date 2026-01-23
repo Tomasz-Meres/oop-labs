@@ -79,17 +79,19 @@ public abstract class Map
             list.Remove(mappable);
 
             if (list.Count == 0)
+            {
                 _points.Remove(p);
-            _symbols.Remove(p);
-        }
-        else if (list.Count == 1)
-        {
-            // został jeden → jego symbol
-            _symbols[p] = list[0].MapSymbol;
-        }
-        else
-        {
-            _symbols[p] = 'X';
+                _symbols.Remove(p);
+            }
+            else if (list.Count == 1)
+            {
+                // został jeden → jego symbol
+                _symbols[p] = list[0].MapSymbol;
+            }
+            else
+            {
+                _symbols[p] = 'X';
+            }
         }
     }
 

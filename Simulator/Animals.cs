@@ -2,7 +2,7 @@
 
 namespace Simulator;
 
-public class Animals : IMappable
+public class Animals : IMappable, IDeletable
 {
     private string description = "Unknown";
     public required string Description { 
@@ -12,6 +12,7 @@ public class Animals : IMappable
         }
     }
     public uint Size { get; set; } = 3;
+    
 
     public virtual string Info
     {
@@ -24,6 +25,10 @@ public class Animals : IMappable
     public Map? Map => _map;
 
     public virtual char MapSymbol => 'A';
+
+    public bool IsDeleted => Size == 0;
+
+    public virtual Point GetDestination(Direction d) => Map?.Next(Position, d) ?? Position;
 
     public virtual void Go(Direction direction)
     {
@@ -52,6 +57,23 @@ public class Animals : IMappable
 
         _map = map;
         _point = StartingPosition;
+    }
+
+
+    /// <summary>
+    /// Reduces the size of the animal by a given percentage.
+    /// </summary>
+    /// <param name="percent"></param>
+    public virtual void DecreaseSize(double percent)
+    {
+        if (Size == 1)
+        {
+            Size = 0;
+        }
+        else
+        {
+            Size = (uint)Math.Max(0, Math.Floor(Size * (1 - percent)));
+        }
     }
 
     public override string ToString()

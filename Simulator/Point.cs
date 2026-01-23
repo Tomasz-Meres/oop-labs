@@ -11,7 +11,9 @@ public readonly struct Point
         if (direction == Direction.Up) return new Point(X, Y + 1);
         if (direction == Direction.Right) return new Point(X + 1, Y);
         if (direction == Direction.Down) return new Point(X, Y - 1);
-        return new Point(X - 1, Y);
+        if (direction == Direction.Left) return new Point(X-1, Y);
+
+        return this;
     }
 
     // rotate given direction 45 degrees clockwise
@@ -20,7 +22,7 @@ public readonly struct Point
         if (direction == Direction.Up) return new Point(X + 1, Y + 1);
         if (direction == Direction.Right) return new Point(X + 1, Y - 1);
         if (direction == Direction.Down) return new Point(X - 1, Y - 1);
-        return new Point(X - 1, Y + 1);
-
+        if (direction == Direction.Left) return new Point(X - 1, Y + 1);
+        return this;
     }
 }

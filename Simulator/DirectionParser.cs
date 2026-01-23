@@ -12,6 +12,7 @@ public static class DirectionParser
                 case 'R': directions.Add(Direction.Right); break;
                 case 'D': directions.Add(Direction.Down); break;
                 case 'L': directions.Add(Direction.Left); break;
+                case 'S': directions.Add(Direction.Stay); break;
                 default: break;
             }
         }

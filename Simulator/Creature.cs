@@ -2,7 +2,7 @@
 
 namespace Simulator;
 
-public abstract class Creature : IMappable
+public abstract class Creature : IMappable, IDeletable, IAttacker
 {
     private Map? _map;
     private Point _point;
@@ -10,6 +10,15 @@ public abstract class Creature : IMappable
     public Map? Map => _map;
 
     private string _name = "Unknown";
+    private int _damage = 0;
+    public virtual int MaxHealth => Level * 30;
+    public virtual int CurrentHealth => Math.Max(0, MaxHealth - _damage);
+    public bool IsDeleted => CurrentHealth <= 0;
+    public virtual Point GetDestination(Direction d)
+    {
+        return Map?.Next(Position, d) ?? Position;
+    }
+
     public string Name
     {
         get { return _name; }
@@ -79,6 +88,31 @@ public abstract class Creature : IMappable
     }
 
     public abstract int Power { get; }
+
+    public abstract int MagicBuffDuration { get; protected set; }
+
+    public void ApplyMagicBuff(int duration) => MagicBuffDuration = duration;
+    public void UpdateBuffs() { if (MagicBuffDuration > 0) MagicBuffDuration--; }
+
+    public virtual void Attack(IDamageable target)
+    {
+        // Atakujemy tylko jeśli sami żyjemy i cel istnieje
+        if (IsDeleted || target == null || target == this) return;
+        
+        target.TakeDamage(this.Power);
+    }
+
+    public virtual void TakeDamage(int amount)
+    {
+        _damage = Math.Min(MaxHealth, _damage + Math.Max(0, amount));
+    }
+
+    public virtual void Heal(int amount)
+    {
+        if (IsDeleted) return;
+
+        _damage = Math.Max(0, _damage - Math.Max(0, amount));
+    }
 
     public override string ToString()
     {
